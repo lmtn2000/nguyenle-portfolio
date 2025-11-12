@@ -29,7 +29,7 @@ jobs:
         run: pnpm run build
 
       - name: Sync build folder to S3
-        uses: aws-actions/s3-sync@v2
+        uses: aws-actions/s3-sync@v1
         with:
           bucket: ${{ secrets.S3_BUCKET }}
           region: ${{ secrets.AWS_REGION }}
