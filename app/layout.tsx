@@ -3,22 +3,33 @@ import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { Navbar } from './components/nav'
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
+import ThemeWrapper from './components/theme-wrapper'
+import { ThemeProvider } from './components/theme-context'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Next.js Portfolio Starter',
-    template: '%s | Next.js Portfolio Starter',
+    default: 'Nguyen Le | Fullstack Engineer',
+    template: '%s | Nguyen Le Portfolio',
   },
-  description: 'This is my portfolio.',
+  description:
+    'Portfolio of Nguyen Le — a Fullstack Engineer passionate about web development and cloud architecture (AWS).',
   openGraph: {
-    title: 'My Portfolio',
-    description: 'This is my portfolio.',
-    siteName: 'My Portfolio',
+    title: 'Nguyen Le | Fullstack Engineer & Cloud Developer',
+    description:
+      'Explore Nguyen Le’s portfolio showcasing fullstack projects, AWS cloud solutions, and modern web applications.',
+    siteName: 'Nguyen Le Portfolio',
     locale: 'en_US',
     type: 'website',
+    url: 'https://your-portfolio-domain.com',
+    images: [
+      {
+        url: 'https://your-portfolio-domain.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Nguyen Le Portfolio',
+      },
+    ],
   },
   robots: {
     index: true,
@@ -33,7 +44,7 @@ export const metadata: Metadata = {
   },
 }
 
-const cx = (...classes) => classes.filter(Boolean).join(' ')
+const cx = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
 export default function RootLayout({
   children,
@@ -44,19 +55,21 @@ export default function RootLayout({
     <html
       lang="en"
       className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
+        'scroll-smooth',
         GeistSans.variable,
         GeistMono.variable
       )}
     >
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          <Navbar />
-          {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
+      <body className="antialiased">
+        <ThemeProvider>
+          <ThemeWrapper>
+            <main className="max-w-3xl mx-auto px-4 pt-10 pb-16 flex flex-col min-h-screen relative">
+              <Navbar />
+              <div className="flex-auto">{children}</div>
+              <Footer />
+            </main>
+          </ThemeWrapper>
+        </ThemeProvider>
       </body>
     </html>
   )
