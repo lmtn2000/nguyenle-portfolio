@@ -12,8 +12,8 @@ type Cell = {
   adjacent: number
 }
 
-const GRID_SIZE = 10
-const MINES_COUNT = 20   // giữ tỉ lệ ~20%
+const GRID_SIZE = 8
+const MINES_COUNT = 10
 
 export default function Minesweeper() {
   const { isDark } = useTheme()
@@ -165,7 +165,7 @@ export default function Minesweeper() {
         Restart Game
       </button>
 
-      <div className={`grid grid-cols-${GRID_SIZE} gap-1`}>
+      <div className="grid grid-cols-8 gap-1">
         {grid.map((row, r) =>
           row.map((cell, c) => (
             <motion.div
